@@ -13,8 +13,10 @@ function App() {
     <Content>
       <p>Tip App :)</p>
         <Space size='large' direction='vertical'>
+          <Space size={200}>
         <TipForm />
         <ResultBox result={5 + 5 + "Kč"}/>
+          </Space>
           <HistoryList/>
         </Space>
     </Content>
