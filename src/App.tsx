@@ -1,11 +1,24 @@
 import React from 'react';
+import 'antd/dist/antd.css';
 import './App.css';
+import TipForm from './components/TipForm'
+import ResultBox from "./components/ResultBox";
+import {Layout, Space} from "antd";
+import {Content} from "antd/es/layout/layout";
+import HistoryList from "./components/HistoryList";
 
 function App() {
   return (
-    <div>
+      <Layout>
+    <Content>
       <p>Tip App :)</p>
-    </div>
+        <Space size='large' direction='vertical'>
+        <TipForm />
+        <ResultBox result={5 + 5 + "Kč"}/>
+          <HistoryList/>
+        </Space>
+    </Content>
+      </Layout>
   );
 }
 
