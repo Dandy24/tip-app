@@ -1,7 +1,8 @@
 import SelectList from './SelectList'
 //import Button from "./Button";
-import {InputNumber, Button, Space} from "antd";
+import {Button, Space} from "antd";
 import {useRef} from "react";
+import NumberInput from "./NumberInput";
 
 function TipForm(){
 
@@ -45,24 +46,14 @@ function TipForm(){
     return(
         <form onSubmit={submitHandler}>
             <Space direction='vertical' size='large'>
-            <div>
-                <Space size='large'>
-                <label htmlFor='amount'>Částka na účtu</label>
-                <InputNumber required id='amount' ref={amountRef}></InputNumber>
-                </Space>
-            </div>
+                <NumberInput spaceSize='large' id='amount' reference={amountRef} label='Částka na účtu'/>
             <div>
                 <Space size='large'>
                 <label htmlFor='quality'>Kvalita obsluhy</label>
-                <SelectList data={service} reference={qualityRef}/>
+                <SelectList data={service} reference={qualityRef} id='quality'/>
                 </Space>
             </div>
-            <div>
-                <Space size='large'>
-                <label htmlFor='peopleNo'>Kolik lidí se dělí o účet</label>
-                <InputNumber required id='peopleNo' ref={peopleNoRef}></InputNumber>
-                </Space>
-            </div>
+            <NumberInput spaceSize='large' id='peopleNo' reference={peopleNoRef} label='Kolik lidí se dělí o účet'/>
             <div>
                 <Button type='primary' htmlType='submit'>Vypočítat</Button>
             </div>
