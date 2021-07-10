@@ -1,6 +1,6 @@
 import HistoryItem from "./HistoryItem";
 import {useState} from "react";
-import {Space} from "antd";
+import {Divider, Space} from "antd";
 
 function HistoryList(){
 
@@ -26,12 +26,14 @@ function HistoryList(){
 
     return(
         <>
-        <h1>Historie dýšek</h1>
+        <Divider>
+            <h1>Historie dýšek</h1>
+        </Divider>
             {tips.map((tip) => {
                 return(
-                    <Space>
-                        <HistoryItem id={tip.id} key={tip.id} overallAmount={tip.overallAmount} quality={tip.quality} peopleNo={tip.peopleNo}/>
-                    </Space>
+                    <Divider>
+                    <HistoryItem id={tip.id} key={tip.id} overallAmount={tip.overallAmount} quality={tip.quality} peopleNo={tip.peopleNo}/>
+                    </Divider>
                 )
             })}
         </>
