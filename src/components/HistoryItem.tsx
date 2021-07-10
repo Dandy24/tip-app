@@ -1,13 +1,16 @@
-import {Card} from "antd";
+import {Card, Descriptions} from "antd";
+import DescriptionsItem from "antd/es/descriptions/Item";
 
 // @ts-ignore
 function HistoryItem(props){
 
     return(
         <Card title={'Objednávka č.:' + props.id}>
-            <p>Celková cena objednávky: {props.overallAmount}</p>
-            <p>Kvalita obsluhy: {props.quality}</p>
-            <p>Počet lidí u stolu: {props.peopleNo}</p>
+            <Descriptions bordered>
+                <DescriptionsItem label='Celková cena objednávky'>{props.overallAmount}</DescriptionsItem>
+                <DescriptionsItem label='Kvalita obsluhy'>{props.quality}</DescriptionsItem>
+                <DescriptionsItem label='Počet lidí u stolu'>{props.peopleNo}</DescriptionsItem>
+            </Descriptions>
         </Card>
     )
 

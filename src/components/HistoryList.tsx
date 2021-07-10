@@ -1,5 +1,6 @@
 import HistoryItem from "./HistoryItem";
 import {useState} from "react";
+import {Space} from "antd";
 
 function HistoryList(){
 
@@ -28,7 +29,9 @@ function HistoryList(){
         <h1>Historie dýšek</h1>
             {tips.map((tip) => {
                 return(
-                    <HistoryItem id={tip.id} key={tip.id} overallAmount={tip.overallAmount} quality={tip.quality} peopleNo={tip.peopleNo}/>
+                    <Space>
+                        <HistoryItem id={tip.id} key={tip.id} overallAmount={tip.overallAmount} quality={tip.quality} peopleNo={tip.peopleNo}/>
+                    </Space>
                 )
             })}
         </>
