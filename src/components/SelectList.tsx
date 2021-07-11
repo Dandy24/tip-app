@@ -1,21 +1,29 @@
 import {Select} from "antd";
-import {Option} from "antd/es/mentions";
+import {SelectProps} from "antd/lib/select";
 
-function SelectList(props: {
-    reference: any;
-    data: any[]; }){
+export interface SelectListProps extends SelectProps<any>{
+    data: ServiceData[]
+}
+
+export interface ServiceData {
+    amount: number,
+    desc: string
+}
+
+
+export function SelectList(props: SelectListProps){
+
+    const {data, id} = props
 
     return(
 
-    <Select id='quality' defaultValue={props.data[0].desc} style={{ width: 200 }} ref={props.reference}>
-        {props.data.map((serv) =>{
+    <Select id={id} defaultValue={data[0].desc} style={{ width: 200 }} {...props}>
+        {data.map((serv) =>{
             return(
-                <Option value={serv.amount}>{serv.desc}</Option>
+                <Select.Option value={serv.amount}>{serv.desc}</Select.Option>
             )
         })}
 
     </Select>
     )
 }
-
-export default SelectList;

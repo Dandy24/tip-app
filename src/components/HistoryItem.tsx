@@ -1,19 +1,25 @@
 import {Card, Descriptions} from "antd";
 import DescriptionsItem from "antd/es/descriptions/Item";
 
-// @ts-ignore
-function HistoryItem(props){
+export interface HistoryItemProps{
+    id: number,
+    overallAmount: number,
+    quality: string,
+    peopleNo: number
+}
+
+export function HistoryItem(props: HistoryItemProps): JSX.Element {
+
+    const {id, overallAmount, peopleNo, quality} = props
 
     return(
-        <Card title={'Objednávka č.:' + props.id}>
+        <Card title={'Objednávka č.:' + id}>
             <Descriptions bordered>
-                <DescriptionsItem label='Celková cena objednávky'>{props.overallAmount}</DescriptionsItem>
-                <DescriptionsItem label='Kvalita obsluhy'>{props.quality}</DescriptionsItem>
-                <DescriptionsItem label='Počet lidí u stolu'>{props.peopleNo}</DescriptionsItem>
+                <DescriptionsItem label='Celková cena objednávky'>{overallAmount}</DescriptionsItem>
+                <DescriptionsItem label='Kvalita obsluhy'>{quality}</DescriptionsItem>
+                <DescriptionsItem label='Počet lidí u stolu'>{peopleNo}</DescriptionsItem>
             </Descriptions>
         </Card>
     )
 
 }
-
-export default HistoryItem
