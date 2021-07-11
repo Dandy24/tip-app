@@ -13,7 +13,7 @@ export function HistoryItem(props: HistoryItemProps): JSX.Element {
     const {id, overallAmount, peopleNo, quality} = props
 
     return(
-        <Card title={'Objednávka č.:' + id}>
+        <Card title={'Objednávka č.: ' + id}>
             <Descriptions bordered>
                 <DescriptionsItem label='Celková cena objednávky'>{overallAmount}</DescriptionsItem>
                 <DescriptionsItem label='Kvalita obsluhy'>{quality}</DescriptionsItem>
