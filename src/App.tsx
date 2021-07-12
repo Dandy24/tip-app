@@ -5,15 +5,16 @@ import { Layout } from 'antd';
 import { Content } from 'antd/es/layout/layout';
 import { TipCalculator } from './components/TipCalculator';
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function App() {
-  return (
-    <Layout>
-      <Content>
-        <p>Tip App :)</p>
-        <TipCalculator />
-      </Content>
-    </Layout>
-  );
+    return (
+        <Layout>
+            <Content>
+                <p>Tip App :)</p>
+                <TipCalculator />
+            </Content>
+        </Layout>
+    );
 }
 
 export default App;

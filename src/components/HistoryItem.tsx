@@ -1,5 +1,5 @@
-import {Card, Descriptions} from "antd";
-import DescriptionsItem from "antd/es/descriptions/Item";
+import { Card, Descriptions } from 'antd';
+import DescriptionsItem from 'antd/es/descriptions/Item';
 
 export interface HistoryItemProps{
     id: number,
@@ -9,17 +9,17 @@ export interface HistoryItemProps{
 }
 
 export function HistoryItem(props: HistoryItemProps): JSX.Element {
+    const {
+        id, overallAmount, peopleNo, quality,
+    } = props;
 
-    const {id, overallAmount, peopleNo, quality} = props
-
-    return(
-        <Card title={'Objednávka č.: ' + id}>
+    return (
+        <Card title={`Kód objednávky: ${id}`}>
             <Descriptions bordered>
-                <DescriptionsItem label='Celková cena objednávky'>{overallAmount}</DescriptionsItem>
-                <DescriptionsItem label='Kvalita obsluhy'>{quality}</DescriptionsItem>
-                <DescriptionsItem label='Počet lidí u stolu'>{peopleNo}</DescriptionsItem>
+                <DescriptionsItem label="Celková cena objednávky">{overallAmount}</DescriptionsItem>
+                <DescriptionsItem label="Kvalita obsluhy">{quality}</DescriptionsItem>
+                <DescriptionsItem label="Počet lidí u stolu">{peopleNo}</DescriptionsItem>
             </Descriptions>
         </Card>
-    )
-
+    );
 }
