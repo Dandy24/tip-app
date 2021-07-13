@@ -2,7 +2,12 @@ import { Divider } from 'antd';
 import { useEffect, useState } from 'react';
 import { HistoryItem } from './HistoryItem';
 
-export function HistoryList(props: any): JSX.Element {
+export interface HistoryListProps{
+    calculated : boolean,
+    setCalculated: (arg0: boolean) => void
+}
+
+export function HistoryList(props: HistoryListProps): JSX.Element {
     const { calculated, setCalculated } = props;
 
     const tips = [

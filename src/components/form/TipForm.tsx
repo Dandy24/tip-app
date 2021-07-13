@@ -1,14 +1,19 @@
-// import Button from "./Button";
 import { Button, Space } from 'antd';
 import React, { FormEvent, useState } from 'react';
 import { SelectList, ServiceData } from './SelectList';
 import { NumberInput } from './NumberInput';
 import { ResultBox } from './ResultBox';
 
-function TipForm(props: { submitTipData: (arg0: { amount: number; quality: string; peopleNo: number; }) => void; })
-    : JSX.Element {
+export interface TipFormProps{
+    submitTipData: (arg0: {
+        amount: number;
+        quality: string;
+        peopleNo: number; }) => void;
+}
+
+export function TipForm(props: TipFormProps): JSX.Element {
     const [amount, setAmount] = useState(0);
-    const [quality, setQuality] = useState<string>('');
+    const [quality, setQuality] = useState<string>('Dobrá');
     const [peopleNo, setPeopleNo] = useState<number>(0);
     const [result, setResult] = useState<number>(0);
 
@@ -29,7 +34,7 @@ function TipForm(props: { submitTipData: (arg0: { amount: number; quality: strin
     const submitHandler = (event: FormEvent): void => {
         event.preventDefault();
 
-        if (amount >= 0 && peopleNo >= 1) {
+        if (amount > 0 && peopleNo >= 1) {
             let tipResult = 0;
 
             if (quality === 'Špatná') {
@@ -94,11 +99,9 @@ function TipForm(props: { submitTipData: (arg0: { amount: number; quality: strin
                 </form>
 
                 { result ? <ResultBox result={result} currency="Kč" />
-                    : <h2>Pro zjisteni vysledku prosim vyplnte udaje ve formulari</h2>}
+                    : <h2>Pro zjištění výsledku prosím vyplňte údaje ve formuláři</h2>}
 
             </Space>
         </>
     );
 }
-
-export default TipForm;

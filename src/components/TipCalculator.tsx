@@ -1,6 +1,6 @@
 import { Space } from 'antd';
 import React, { useState } from 'react';
-import TipForm from './form/TipForm';
+import { TipForm } from './form/TipForm';
 import { HistoryList } from './history/HistoryList';
 
 export function TipCalculator(): JSX.Element {

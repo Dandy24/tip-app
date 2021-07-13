@@ -7,8 +7,7 @@ import {
 import { Content } from 'antd/es/layout/layout';
 import { TipCalculator } from './components/TipCalculator';
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function App() {
+function App(): JSX.Element {
     return (
         <Layout>
             <Space direction="vertical" size={30}>

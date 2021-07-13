@@ -15,7 +15,7 @@ export function SelectList(props: SelectListProps): JSX.Element {
 
     return (
 
-        <Select id={id} defaultValue={data[0].desc} style={{ width: 200 }} {...props}>
+        <Select id={id} defaultValue={data[1].desc} style={{ width: 200 }} {...props}>
             {data.map((serv) => (
                 <Select.Option value={serv.desc}>{serv.desc}</Select.Option>
             ))}
