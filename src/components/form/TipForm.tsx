@@ -5,10 +5,10 @@ import { SelectList, ServiceData } from './SelectList';
 import { NumberInput } from './NumberInput';
 import { ResultBox } from './ResultBox';
 
-function TipForm(props: { submitTipData: (arg0: { amount: number; quality: number; peopleNo: number; }) => void; })
+function TipForm(props: { submitTipData: (arg0: { amount: number; quality: string; peopleNo: number; }) => void; })
     : JSX.Element {
     const [amount, setAmount] = useState(0);
-    const [quality, setQuality] = useState<number>(0);
+    const [quality, setQuality] = useState<string>('');
     const [peopleNo, setPeopleNo] = useState<number>(0);
     const [result, setResult] = useState<number>(0);
 
@@ -30,8 +30,15 @@ function TipForm(props: { submitTipData: (arg0: { amount: number; quality: numbe
         event.preventDefault();
 
         if (amount >= 0 && peopleNo >= 1) {
-            const tipResult = amount + (amount * (quality / 100)) + ((peopleNo * 10) - 10);
+            let tipResult = 0;
 
+            if (quality === 'Špatná') {
+                tipResult = amount + (amount * (2 / 100)) + ((peopleNo * 10) - 10);
+            } else if (quality === 'Dobrá') {
+                tipResult = amount + (amount * (10 / 100)) + ((peopleNo * 10) - 10);
+            } else {
+                tipResult = amount + (amount * (15 / 100)) + ((peopleNo * 10) - 10);
+            }
             const finalResult = Math.ceil(tipResult / 10) * 10;
 
             setResult(finalResult);
@@ -42,8 +49,6 @@ function TipForm(props: { submitTipData: (arg0: { amount: number; quality: numbe
                 peopleNo,
                 finalResult,
             };
-
-            console.log(tipData);
 
             props.submitTipData(tipData);
         }
@@ -69,7 +74,9 @@ function TipForm(props: { submitTipData: (arg0: { amount: number; quality: numbe
                                 <label htmlFor="quality">Kvalita obsluhy</label>
                                 <SelectList
                                     data={service}
-                                    onSelect={(value) => { setQuality(parseInt(value.toString(), 10)); }}
+                                    onSelect={(value) => {
+                                        setQuality(value);
+                                    }}
                                     id="quality"
                                 />
                             </Space>
@@ -86,7 +93,8 @@ function TipForm(props: { submitTipData: (arg0: { amount: number; quality: numbe
                     </Space>
                 </form>
 
-                <ResultBox result={result} currency="Kč" />
+                { result ? <ResultBox result={result} currency="Kč" />
+                    : <h2>Pro zjisteni vysledku prosim vyplnte udaje ve formulari</h2>}
 
             </Space>
         </>

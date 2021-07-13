@@ -20,7 +20,6 @@ export function TipCalculator(): JSX.Element {
             <Space size={200}>
                 <TipForm submitTipData={submitTipDataHandler} />
             </Space>
-            {console.log(isCalculated)}
             <HistoryList calculated={isCalculated} setCalculated={setIsCalculated} />
         </Space>
     );
