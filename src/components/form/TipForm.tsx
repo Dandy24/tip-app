@@ -29,22 +29,24 @@ function TipForm(props: { submitTipData: (arg0: { amount: number; quality: numbe
     const submitHandler = (event: FormEvent): void => {
         event.preventDefault();
 
-        const tipResult = amount + (amount * (quality / 100)) + ((peopleNo * 10) - 10);
+        if (amount >= 0 && peopleNo >= 1) {
+            const tipResult = amount + (amount * (quality / 100)) + ((peopleNo * 10) - 10);
 
-        const finalResult = Math.ceil(tipResult / 10) * 10;
+            const finalResult = Math.ceil(tipResult / 10) * 10;
 
-        setResult(finalResult);
+            setResult(finalResult);
 
-        const tipData = {
-            amount,
-            quality,
-            peopleNo,
-            finalResult,
-        };
+            const tipData = {
+                amount,
+                quality,
+                peopleNo,
+                finalResult,
+            };
 
-        console.log(tipData);
+            console.log(tipData);
 
-        props.submitTipData(tipData);
+            props.submitTipData(tipData);
+        }
     };
 
     return (
@@ -57,7 +59,7 @@ function TipForm(props: { submitTipData: (arg0: { amount: number; quality: numbe
                             spacesize="large"
                             id="amount"
                             onChange={(value) => {
-                                setAmount(parseInt(value.toString(), 10));
+                                setAmount(parseInt(value + ''.toString(), 10));
                             }}
                             label="Částka na účtu"
                         />
@@ -75,7 +77,7 @@ function TipForm(props: { submitTipData: (arg0: { amount: number; quality: numbe
                         <NumberInput
                             spacesize="large"
                             id="peopleNo"
-                            onChange={(value) => { setPeopleNo(parseInt(value.toString(), 10)); }}
+                            onChange={(value) => { setPeopleNo(parseInt(value + ''.toString(), 10)); }}
                             label="Kolik lidí se dělí o účet"
                         />
                         <div>
