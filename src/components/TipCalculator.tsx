@@ -1,7 +1,7 @@
 import { Space } from 'antd';
 import React, { useState } from 'react';
 import TipForm from './form/TipForm';
-import { HistoryList } from './HistoryList';
+import { HistoryList } from './history/HistoryList';
 
 export function TipCalculator(): JSX.Element {
     const [isCalculated, setIsCalculated] = useState(false);
@@ -16,7 +16,7 @@ export function TipCalculator(): JSX.Element {
     }
 
     return (
-        <Space size="large" direction="vertical">
+        <Space size={130} direction="vertical">
             <Space size={200}>
                 <TipForm submitTipData={submitTipDataHandler} />
             </Space>
