@@ -1,22 +1,32 @@
-import { InputNumber, Space } from 'antd';
-import { InputNumberProps } from 'antd/lib/input-number';
+import { Space, Alert } from 'antd';
+import { InputNumber } from 'formik-antd';
+import { useField } from 'formik';
 import { SpaceSize } from 'antd/es/space';
 
-export interface NumberInputProps extends InputNumberProps{
+export interface NumberInputProps{
     label: string,
     spacesize: SpaceSize,
-    id: string,
-
+    name: string,
 }
 
-export function NumberInput(props: NumberInputProps): JSX.Element {
-    const { label, spacesize, id } = props;
+export function NumberInput({ ...props }: NumberInputProps): JSX.Element {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [field, meta] = useField(props);
+    const { label, spacesize, name } = props;
 
     return (
         <div>
             <Space size={spacesize}>
-                <label htmlFor={id}>{label}</label>
-                <InputNumber {...props} id={id} />
+                <label htmlFor={name}>{label}</label>
+                <InputNumber name={name} />
+                {meta.touched && meta.error
+                    ? (
+                        <Alert
+                            message={meta.error}
+                            type="error"
+                            showIcon
+                        />
+                    ) : null}
             </Space>
         </div>
     );

@@ -1,8 +1,9 @@
-import { Select } from 'antd';
+import { Select } from 'formik-antd';
 import { SelectProps } from 'antd/lib/select';
 
 export interface SelectListProps extends SelectProps<any>{
-    data: ServiceData[]
+    data: ServiceData[],
+    name: string
 }
 
 export interface ServiceData {
@@ -11,15 +12,14 @@ export interface ServiceData {
 }
 
 export function SelectList(props: SelectListProps): JSX.Element {
-    const { data, id } = props;
+    const { data, name } = props;
 
     return (
 
-        <Select id={id} defaultValue={data[1].desc} style={{ width: 200 }} {...props}>
+        <Select name={name} style={{ width: 200 }}>
             {data.map((serv) => (
                 <Select.Option value={serv.desc}>{serv.desc}</Select.Option>
             ))}
-
         </Select>
     );
 }
