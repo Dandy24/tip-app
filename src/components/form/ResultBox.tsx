@@ -1,16 +1,20 @@
+import { Statistic } from 'antd';
+
 export interface ResultBoxProps {
     result?: number
-    currency: string
+    currency?: string
 }
 
 export function ResultBox(props: ResultBoxProps): JSX.Element {
     const { result, currency } = props;
 
+    if (result && currency) {
+        return (
+            <Statistic title="Celková cena včetně dýška" value={`${result} ${currency}`} />
+        );
+    }
+
     return (
-        <h2>
-            {result}
-            {' '}
-            {currency}
-        </h2>
+        <Statistic title="Celková cena včetně dýška" value="0 Kč" />
     );
 }
