@@ -17,7 +17,9 @@ export function HistoryList(props: HistoryListProps): JSX.Element {
     useEffect(() => {
         getTipData()
             .then((data) => {
-                const responseTips = Object.entries(data).map((dataEl: any) => ({ id: dataEl[0], ...dataEl[1] }));
+                const responseTips = data
+                    ? Object.entries(data).map((dataEl: any) => ({ id: dataEl[0], ...dataEl[1] }))
+                    : [];
 
                 setIsLoading(false);
                 setLoadedTips(responseTips.reverse());
@@ -27,7 +29,9 @@ export function HistoryList(props: HistoryListProps): JSX.Element {
 
     if (isLoading) {
         return (
-            <Spin spinning>Načítá se historie dýšek.</Spin>
+            <div style={{ textAlign: 'center' }}>
+                <Spin spinning>Načítá se historie dýšek.</Spin>
+            </div>
         );
     }
 
