@@ -1,6 +1,7 @@
-import { Divider } from 'antd';
+import { Divider, Spin } from 'antd';
 import { useEffect, useState } from 'react';
 import { HistoryItem } from './HistoryItem';
+import { getTipData } from '../../api/tipAPI';
 
 export interface HistoryListProps{
     calculated : boolean,
@@ -10,44 +11,23 @@ export interface HistoryListProps{
 export function HistoryList(props: HistoryListProps): JSX.Element {
     const { calculated, setCalculated } = props;
 
-    const tips = [
-        {
-            id: 1,
-            overallAmount: 400,
-            quality: 'Špatná',
-            peopleNo: 3,
-        },
-        {
-            id: 2,
-            overallAmount: 520,
-            quality: 'Dobrá',
-            peopleNo: 2,
-        },
-        {
-            id: 3,
-            overallAmount: 765,
-            quality: 'Perfektní, jsem nadšený',
-            peopleNo: 4,
-        }];
-
     const [isLoading, setIsLoading] = useState(true);
-    const [loadedTips, setLoadedTips] = useState(tips);
+    const [loadedTips, setLoadedTips] = useState<any[]>([]); // TODO create response type
 
     useEffect(() => {
-        fetch('https://tip-app-54c1b-default-rtdb.europe-west1.firebasedatabase.app/tips.json').then(
-            (response) => response.json(),
-        ).then((data) => {
-            const responseTips = Object.entries(data).map((dataEl: any) => ({ id: dataEl[0], ...dataEl[1] }));
+        getTipData()
+            .then((data) => {
+                const responseTips = Object.entries(data).map((dataEl: any) => ({ id: dataEl[0], ...dataEl[1] }));
 
-            setIsLoading(false);
-            setLoadedTips(responseTips.reverse());
-        });
+                setIsLoading(false);
+                setLoadedTips(responseTips.reverse());
+            });
         setCalculated(false);
     }, [calculated, setCalculated]);
 
     if (isLoading) {
         return (
-            <h4>Načítá se historie dýšek.</h4>
+            <Spin spinning>Načítá se historie dýšek.</Spin>
         );
     }
 
@@ -62,7 +42,7 @@ export function HistoryList(props: HistoryListProps): JSX.Element {
                         id={tip.id}
                         key={tip.id}
                         overallAmount={tip.finalResult}
-                        quality={tip.quality}
+                        qualityDesc={tip.quality.desc}
                         peopleNo={tip.peopleNo}
                     />
                 </Divider>
