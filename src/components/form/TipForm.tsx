@@ -1,16 +1,20 @@
-// import Button from "./Button";
 import { Button, Space } from 'antd';
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { SelectList, ServiceData } from './SelectList';
 import { NumberInput } from './NumberInput';
 import { ResultBox } from './ResultBox';
+import { submitTipDataHandler } from '../api/tipAPI';
 
-export function TipForm(props: { submitTipData: (arg0:
-                                                     { amount: number; quality: string; peopleNo: number; }) => void; })
+export interface TipFormProps{
+    setIsCalculated?: Dispatch<SetStateAction<boolean>>
+}
+
+export function TipForm(props: TipFormProps)
     : JSX.Element {
     const [result, setResult] = useState<number>(0);
+    const { setIsCalculated } = props;
 
     const service: ServiceData[] = [
         {
@@ -47,7 +51,9 @@ export function TipForm(props: { submitTipData: (arg0:
             finalResult,
         };
 
-        props.submitTipData(tipData);
+        submitTipDataHandler(tipData).then(() => {
+            if (setIsCalculated) { setIsCalculated(true); }
+        });
     };
 
     return (
@@ -114,8 +120,7 @@ export function TipForm(props: { submitTipData: (arg0:
                 </Formik>
 
                 <div style={{ float: 'right' }}>
-                    { result ? <ResultBox result={result} currency="Kč" />
-                        : <ResultBox />}
+                    <ResultBox result={result} currency="Kč" />
                 </div>
 
             </Space>
