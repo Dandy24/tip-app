@@ -9,7 +9,7 @@ export interface NumberInputProps{
     name: string,
 }
 
-export function NumberInput({ ...props }: NumberInputProps): JSX.Element {
+export function NumberInput(props: NumberInputProps): JSX.Element {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [field, meta] = useField(props);
     const { label, spacesize, name } = props;
@@ -18,7 +18,7 @@ export function NumberInput({ ...props }: NumberInputProps): JSX.Element {
         <div>
             <Space size={spacesize}>
                 <label htmlFor={name}>{label}</label>
-                <InputNumber name={name} />
+                <InputNumber {...props} />
                 {meta.touched && meta.error
                     ? (
                         <Alert

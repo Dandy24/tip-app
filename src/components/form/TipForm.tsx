@@ -2,7 +2,7 @@ import { Button, Space } from 'antd';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { SelectList, ServiceData } from './SelectList';
+import { ServiceSelectList, ServiceData } from './SelectList';
 import { NumberInput } from './NumberInput';
 import { ResultBox } from './ResultBox';
 import { addTipData } from '../../api/tipAPI';
@@ -30,22 +30,15 @@ export function TipForm(props: TipFormProps): JSX.Element {
         }];
 
     const submitHandler = (values: any): void => {
-        let tipResult = 0;
+        const tipResult = values.amount + (values.amount * (values.quality / 100)) + ((values.peopleNo * 10) - 10);
 
-        if (values.quality === 'Špatná') {
-            tipResult = values.amount + (values.amount * (2 / 100)) + ((values.peopleNo * 10) - 10);
-        } else if (values.quality === 'Dobrá') {
-            tipResult = values.amount + (values.amount * (10 / 100)) + ((values.peopleNo * 10) - 10);
-        } else {
-            tipResult = values.amount + (values.amount * (15 / 100)) + ((values.peopleNo * 10) - 10);
-        }
         const finalResult = Math.ceil(tipResult / 10) * 10;
 
         setResult(finalResult);
 
         const tipData = {
             amount: values.amount,
-            quality: values.quality,
+            quality: service.find((serviceEl) => serviceEl.amount === values.quality),
             peopleNo: values.peopleNo,
             finalResult,
         };
@@ -85,9 +78,7 @@ export function TipForm(props: TipFormProps): JSX.Element {
                                 .typeError('Hodnota musi byt zadana'),
                         })
                     }
-                    onSubmit={(values) => {
-                        submitHandler(values);
-                    }}
+                    onSubmit={submitHandler}
                 >
                     <Form>
                         <Space direction="vertical" size="large">
@@ -100,7 +91,7 @@ export function TipForm(props: TipFormProps): JSX.Element {
                                 <Space size="large">
                                     {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                                     <label htmlFor="quality">Kvalita obsluhy</label>
-                                    <SelectList
+                                    <ServiceSelectList
                                         data={service}
                                         name="quality"
                                     />
