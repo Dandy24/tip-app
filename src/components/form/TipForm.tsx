@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { SelectList, ServiceData } from './SelectList';
 import { NumberInput } from './NumberInput';
 import { ResultBox } from './ResultBox';
-import { addTipData } from '../api/tipAPI';
+import { addTipData } from '../../api/tipAPI';
 
 export interface TipFormProps{
     setIsCalculated?: Dispatch<SetStateAction<boolean>>
