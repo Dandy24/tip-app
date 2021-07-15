@@ -5,14 +5,13 @@ import * as Yup from 'yup';
 import { SelectList, ServiceData } from './SelectList';
 import { NumberInput } from './NumberInput';
 import { ResultBox } from './ResultBox';
-import { submitTipDataHandler } from '../api/tipAPI';
+import { addTipData } from '../api/tipAPI';
 
 export interface TipFormProps{
     setIsCalculated?: Dispatch<SetStateAction<boolean>>
 }
 
-export function TipForm(props: TipFormProps)
-    : JSX.Element {
+export function TipForm(props: TipFormProps): JSX.Element {
     const [result, setResult] = useState<number>(0);
     const { setIsCalculated } = props;
 
@@ -51,7 +50,7 @@ export function TipForm(props: TipFormProps)
             finalResult,
         };
 
-        submitTipDataHandler(tipData).then(() => {
+        addTipData(tipData).then(() => {
             if (setIsCalculated) { setIsCalculated(true); }
         });
     };
