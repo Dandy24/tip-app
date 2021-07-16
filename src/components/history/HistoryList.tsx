@@ -1,5 +1,6 @@
 import { Divider, Spin } from 'antd';
 import { useEffect, useState } from 'react';
+import { LoadingOutlined } from '@ant-design/icons';
 import { HistoryItem } from './HistoryItem';
 import { getTipData } from '../../api/tipAPI';
 
@@ -13,6 +14,8 @@ export function HistoryList(props: HistoryListProps): JSX.Element {
 
     const [isLoading, setIsLoading] = useState(true);
     const [loadedTips, setLoadedTips] = useState<any[]>([]); // TODO create response type
+
+    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
     useEffect(() => {
         getTipData()
@@ -30,7 +33,7 @@ export function HistoryList(props: HistoryListProps): JSX.Element {
     if (isLoading) {
         return (
             <div style={{ textAlign: 'center' }}>
-                <Spin spinning>Načítá se historie dýšek.</Spin>
+                <Spin spinning indicator={antIcon}>Načítá se historie dýšek.</Spin>
             </div>
         );
     }
